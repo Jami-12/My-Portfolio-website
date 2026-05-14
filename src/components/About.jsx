@@ -1,121 +1,176 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { FaEnvelope, FaPhone, FaGithub, FaLinkedin, FaGlobe, FaFacebook, FaInstagram } from "react-icons/fa";
+import { 
+  FaEnvelope, FaPhone, FaGithub, FaLinkedin, 
+  FaGlobe, FaFacebook, FaInstagram, FaMapMarkerAlt, FaBirthdayCake 
+} from "react-icons/fa";
 
 export default function About() {
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.1, delayChildren: 0.2 }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: { y: 0, opacity: 1, transition: { duration: 0.5, ease: "easeOut" } }
+  };
+
   return (
-    <section id="about" className="py-20 bg-gray-50 dark:bg-gray-900">
-      <div className="max-w-5xl mx-auto px-6">
-        <motion.h2
-          initial={{ opacity: 0, y: -20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="text-3xl font-bold text-indigo-500 text-center mb-12"
-        >
-          About Me
-        </motion.h2>
-
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-xl"
-        >
-          <motion.p
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ delay: 0.2, duration: 0.8 }}
-            className="text-gray-700 dark:text-gray-300 leading-relaxed text-lg mb-6"
+    <section id="about" className="py-24 bg-[#FDFBF6] dark:bg-gray-950 transition-colors duration-300">
+      <div className="max-w-6xl mx-auto px-6">
+        
+        {/* Header Section */}
+        <div className="text-center mb-16">
+          <motion.h2
+            initial={{ opacity: 0, y: -20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-sm uppercase tracking-[4px] font-bold text-indigo-500 mb-3"
           >
-            Hi, I’m <strong className="text-indigo-500">Mujaddid Ahmed Jami</strong>, 
-            a <span className="font-medium">Junior Web Developer</span> from Moulvibazar, Sylhet, Bangladesh.  
-            I love building <span className="font-medium">responsive, accessible, and animated</span> web applications 
-            using <strong>React, Tailwind CSS</strong>, and modern tools.  
-            I’m also familiar with <strong>REST APIs, Git/GitHub, and basic Node.js</strong>.  
-            <br /><br />
-            <span className="italic text-sm text-gray-500">
-              Date of Birth: March 12, 2008
-            </span>
-          </motion.p>
+            Story
+          </motion.h2>
+          <motion.h3
+            initial={{ opacity: 0, y: -10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-4xl md:text-5xl font-black text-gray-900 dark:text-white"
+          >
+            About Me
+          </motion.h3>
+        </div>
 
-          <div className="grid sm:grid-cols-2 sm:px-4 gap-4 mt-6">
+        <motion.div 
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="grid grid-cols-1 md:grid-cols-3 gap-6"
+        >
+          {/* Main Intro Card - Occupies 2 columns */}
+          <motion.div 
+            variants={itemVariants}
+            className="md:col-span-2 bg-white dark:bg-gray-900 p-8 md:p-10 rounded-[2.5rem] shadow-sm border border-gray-100 dark:border-gray-800 flex flex-col justify-between"
+          >
+            <div>
+              <h4 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+                I am <span className="text-indigo-600 dark:text-indigo-400">Mujaddid Ahmed Jami</span>
+              </h4>
+              <p className="text-gray-600 dark:text-gray-400 leading-relaxed text-lg italic">
+                "Building responsive, accessible, and animated web applications using React, Tailwind CSS, and modern tools."
+              </p>
+              <p className="mt-6 text-gray-700 dark:text-gray-300 leading-relaxed">
+                Based in Moulvibazar, Sylhet, I focus on crafting clean user interfaces. 
+                I’m highly motivated to explore modern frontend architectures and backend basics like Node.js.
+              </p>
+            </div>
+
+            <div className="flex flex-wrap gap-6 mt-10 pt-8 border-t border-gray-50 dark:border-gray-800">
+              <div className="flex items-center gap-3">
+                <div className="p-3 bg-indigo-50 dark:bg-indigo-500/10 rounded-2xl text-indigo-600">
+                  <FaMapMarkerAlt />
+                </div>
+                <span className="text-sm font-semibold text-gray-600 dark:text-gray-400">Sylhet, Bangladesh</span>
+              </div>
+              <div className="flex items-center gap-3">
+                <div className="p-3 bg-pink-50 dark:bg-pink-500/10 rounded-2xl text-pink-600">
+                  <FaBirthdayCake />
+                </div>
+                <span className="text-sm font-semibold text-gray-600 dark:text-gray-400">March 12, 2008</span>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Social Bento Grid - Occupies 1 column */}
+          <div className="grid grid-cols-2 gap-4">
+            <SocialCard 
+              href="https://github.com/Jami-12" 
+              icon={<FaGithub size={24} />} 
+              label="GitHub" 
+              color="hover:text-black dark:hover:text-white"
+            />
+            <SocialCard 
+              href="https://www.linkedin.com/in/your-linkedin-id" 
+              icon={<FaLinkedin size={24} />} 
+              label="LinkedIn" 
+              color="hover:text-blue-600"
+            />
+            <SocialCard 
+              href="https://www.facebook.com/share/1Ce3WSz7g3/" 
+              icon={<FaFacebook size={24} />} 
+              label="Facebook" 
+              color="hover:text-blue-700"
+            />
+            <SocialCard 
+              href="https://www.instagram.com/mujaddid__jami" 
+              icon={<FaInstagram size={24} />} 
+              label="Instagram" 
+              color="hover:text-pink-500"
+            />
+            
+            {/* Contact Large Card */}
             <motion.a
+              variants={itemVariants}
               href="mailto:mujaddidahmedjami2025@gmail.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              whileHover={{ scale: 1.05 }}
-              className="flex items-center gap-3 p-3 rounded-lg bg-gray-100 dark:bg-gray-700 hover:bg-indigo-100 dark:hover:bg-indigo-600 transition"
+              className="col-span-2 p-6 rounded-[2rem] bg-indigo-600 text-white flex flex-col justify-between group overflow-hidden relative"
             >
-              <FaEnvelope className="text-indigo-500" />
-              <span className="text-sm">mujaddidahmedjami2025@gmail.com</span>
-            </motion.a>
-
-            <motion.a
-              href="tel:+8801703768306"
-              whileHover={{ scale: 1.05 }}
-              className="flex items-center gap-3 p-3 rounded-lg bg-gray-100 dark:bg-gray-700 hover:bg-indigo-100 dark:hover:bg-indigo-600 transition"
-            >
-              <FaPhone className="text-green-500" />
-              <span className="text-sm">+880 1703-768306</span>
-            </motion.a>
-
-            <motion.a
-              href="https://github.com/Jami-12"
-              target="_blank"
-              rel="noopener noreferrer"
-              whileHover={{ scale: 1.05 }}
-              className="flex items-center gap-3 p-3 rounded-lg bg-gray-100 dark:bg-gray-700 hover:bg-indigo-100 dark:hover:bg-indigo-600 transition"
-            >
-              <FaGithub className="text-gray-800 dark:text-white" />
-              <span className="text-sm">github.com/Jami-12</span>
-            </motion.a>
-
-            <motion.a
-              href="https://www.linkedin.com/in/your-linkedin-id"
-              target="_blank"
-              rel="noopener noreferrer"
-              whileHover={{ scale: 1.05 }}
-              className="flex items-center gap-3 p-3 rounded-lg bg-gray-100 dark:bg-gray-700 hover:bg-indigo-100 dark:hover:bg-indigo-600 transition"
-            >
-              <FaLinkedin className="text-blue-600" />
-              <span className="text-sm">LinkedIn Profile</span>
-            </motion.a>
-
-            <motion.a
-              href="https://www.facebook.com/share/1Ce3WSz7g3/"
-              target="_blank"
-              rel="noopener noreferrer"
-              whileHover={{ scale: 1.05 }}
-              className="flex items-center gap-3 p-3 rounded-lg bg-gray-100 dark:bg-gray-700 hover:bg-indigo-100 dark:hover:bg-indigo-600 transition"
-            >
-              <FaFacebook className="text-blue-700" />
-              <span className="text-sm">Facebook</span>
-            </motion.a>
-
-            <motion.a
-              href="https://www.instagram.com/mujaddid__jami?igsh=MXRmYmN5OGIwODZoOQ=="
-              target="_blank"
-              rel="noopener noreferrer"
-              whileHover={{ scale: 1.05 }}
-              className="flex items-center gap-3 p-3 rounded-lg bg-gray-100 dark:bg-gray-700 hover:bg-indigo-100 dark:hover:bg-indigo-600 transition"
-            >
-              <FaInstagram className="text-pink-500" />
-              <span className="text-sm">Instagram</span>
-            </motion.a>
-
-            <motion.a
-              href="https://mujaddid-jami-portfolio.vercel.app"
-              target="_blank"
-              rel="noopener noreferrer"
-              whileHover={{ scale: 1.05 }}
-              className="flex items-center gap-3 p-3 rounded-lg bg-gray-100 dark:bg-gray-700 hover:bg-indigo-100 dark:hover:bg-indigo-600 transition sm:col-span-2"
-            >
-              <FaGlobe className="text-purple-600" />
-              <span className="text-sm">My Portfolio Website</span>
+              <div className="relative z-10">
+                <FaEnvelope size={28} className="mb-4" />
+                <p className="font-bold text-lg">Let's Talk</p>
+                <p className="text-indigo-100 text-xs truncate">mujaddidahmedjami2025@gmail.com</p>
+              </div>
+              {/* Decorative Circle */}
+              <div className="absolute -bottom-4 -right-4 w-24 h-24 bg-white/10 rounded-full group-hover:scale-150 transition-transform duration-500" />
             </motion.a>
           </div>
         </motion.div>
+
+        {/* Portfolio Link Footer */}
+        <motion.div 
+          variants={itemVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="mt-6"
+        >
+          <a
+            href="https://mujaddid-jami-portfolio.vercel.app"
+            target="_blank"
+            className="w-full p-6 rounded-[2rem] bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 flex items-center justify-between group hover:border-indigo-500 transition-all"
+          >
+            <div className="flex items-center gap-4">
+              <div className="p-4 bg-purple-50 dark:bg-purple-500/10 rounded-2xl text-purple-600 group-hover:rotate-12 transition-transform">
+                <FaGlobe size={22} />
+              </div>
+              <span className="font-bold text-gray-800 dark:text-gray-200">Visit Main Portfolio Website</span>
+            </div>
+            <div className="p-3 bg-gray-50 dark:bg-gray-800 rounded-full text-gray-400 group-hover:bg-indigo-500 group-hover:text-white transition-all">
+              <FaGlobe />
+            </div>
+          </a>
+        </motion.div>
       </div>
     </section>
+  );
+}
+
+// Sub-component for Social Cards
+function SocialCard({ href, icon, label, color }) {
+  return (
+    <motion.a
+      whileHover={{ y: -5 }}
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={`bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 p-6 rounded-[2rem] flex flex-col items-center justify-center gap-3 transition-all group ${color}`}
+    >
+      <div className="text-gray-400 group-hover:scale-110 transition-transform duration-300">
+        {icon}
+      </div>
+      <span className="text-[10px] font-black uppercase tracking-widest text-gray-400">{label}</span>
+    </motion.a>
   );
 }
